@@ -12,8 +12,7 @@ var enemyAttack = 12;
 
 console.log(enemyNames);
 console.log(enemyNames.length);
-console.log(enemyNames[0]);
-console.log(enemyNames[3]);
+
 
 var fight = function(enemyName) {
     // Alert players that they are starting the rounds
@@ -41,7 +40,7 @@ var fight = function(enemyName) {
         //Remove enemy's health by subtracting the amount set in the playerAttack variable
         enemyHealth = enemyHealth - playerAttack
         console.log (
-            playerName + " attacked " + enemyName + ". " + enemyName + "now has " + enemyHealth + " health remaining."
+            playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
         );
 
         // Check enemy's health 
@@ -73,6 +72,12 @@ var fight = function(enemyName) {
     } // End of while loop
 }; // End of fight function 
 
+var startGame = function(){
+    //Reset player stats
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+
 // Fight each enemy-robot by looping over them and fighting them one at a time
 for(var i = 0; i < enemyNames.length; i++) {
     //if player is still alive, keep fighting 
@@ -96,5 +101,32 @@ for(var i = 0; i < enemyNames.length; i++) {
         window.alert( "You have lost your robot in battle! Game over ");
         break; 
      }
+     endGame();
 }
+//startGame();
+};
 
+// Function to end the entire game
+var endGame = function () {
+    // If player is still alive, player wins!
+    if (playerHealth > 0) {
+        window.alert("Great Job, you've survived the game! You now have a score of " + playerMoney + ".");
+    }
+    else{
+         window.alert("You've lost your robot in battle.");
+    }
+
+    // Ask player if they'd like to play again
+     var playAgainConfirm = window.confirm("Would you like to play again?");
+
+     if (playAgainConfirm) {
+         // Restart the game 
+         startGame();
+     }
+     else {
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+     }
+    };
+
+// Start the game when the page loads
+startGame();
